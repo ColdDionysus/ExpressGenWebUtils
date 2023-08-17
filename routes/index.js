@@ -1,19 +1,25 @@
 const router = require("express").Router();
+const QRCode = require("../modules/qrcode");
+const currencyConverter = require("../modules/currency");
 
-router.get("/", (req, res) => {
-  res.send("I am on routes Index.js");
+router.get("/qr", async (req, res) => {
+  const { qr } = req.query;
+  const qrData = await QRCode.toDataURL(qr);
+  res.send(`<img src="${qrData}"></img>`);
 });
 
-router.post("/", (req, res) => {
-  res.send("I am from post routers");
-});
+router.get("/currency", async (req, res) => {
+  const toConvert = new currencyConverter();
+  console.log(req.query);
+  const { from, to, amount } = req.query;
 
-router.put("/", (req, res) => {
-  res.send("Data updated");
-});
+  const converter = await toConvert
+    .from(from)
+    .to(to)
+    .amount(parseInt(amount))
+    .convert();
 
-router.delete("/", (req, res) => {
-  res.send("Delete ");
+  res.send(`<h1>The currency converted is ${converter}</h1>`);
 });
 
 module.exports = router;
