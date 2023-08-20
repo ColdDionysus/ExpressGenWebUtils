@@ -2,6 +2,7 @@ const router = require("express").Router();
 const QRCode = require("../modules/qrcode");
 const currencyConverter = require("../modules/currency");
 const pdfkit = require("../modules/pdfkit");
+
 const fs = require("fs");
 
 router.post("/qr", async (req, res) => {
@@ -48,6 +49,11 @@ router.get("/generate-pdf", (req, res) => {
   } catch (err) {
     res.send("Something went wrong");
   }
+});
+
+router.get("/convert-nepali", (req, res) => {
+  const unicode = convertToUnicode("value");
+  console.log(unicode);
 });
 
 module.exports = router;
