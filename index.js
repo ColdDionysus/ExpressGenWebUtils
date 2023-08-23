@@ -12,6 +12,9 @@ app.use((err, req, res, next) => {
       : err.toString();
   res.status(500).send(err);
 });
+app.use(express.static("public"));
+app.set("view engine", "ejs");
+app.set("views", "./views");
 
 const PORT = process.env.PORT || 3600;
 app.listen(PORT, () => {

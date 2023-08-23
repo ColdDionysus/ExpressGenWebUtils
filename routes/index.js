@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const apiRouter = require("./routes.api");
-
+const uiRoutes = require("./routes.ui");
 router.use("/api/v1", apiRouter);
+router.use("/", uiRoutes);
 // router.get("/currency", async (req, res) => {
 //   try {
 //     const toConvert = new currencyConverter();
