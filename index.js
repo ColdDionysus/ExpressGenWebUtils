@@ -17,7 +17,7 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
-const PORT = process.env.PORT || 3600;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
 });
